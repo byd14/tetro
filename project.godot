@@ -19,6 +19,14 @@ config/icon="res://icon.svg"
 
 BACKYARD="*res://CORE/BACKYARD.gd"
 
+[display]
+
+window/size/viewport_width=240
+window/size/viewport_height=360
+window/size/window_width_override=480
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

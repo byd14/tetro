@@ -1,11 +1,11 @@
 extends Node
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+func collision_check(querier : CollisionShape, types : Array[StringName] = ["Solid"], offset : Vector2i = Vector2i.ZERO):
+	var vault : Array[CollisionShape] = []
+	for i in types:
+		vault.append_array(get_tree().get_nodes_in_group(i))
+	vault.erase(querier)
+	for shape in vault:
+		if querier.complex_intersect(shape, offset):
+			return shape
+	return false
