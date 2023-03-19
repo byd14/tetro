@@ -1,19 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwmsunqes5be6"]
+[gd_scene load_steps=5 format=3 uid="uid://dwmsunqes5be6"]
 
 [ext_resource type="PackedScene" uid="uid://br0tti4kulnk8" path="res://CORE/CollisionShape.tscn" id="1_lb2q0"]
 [ext_resource type="PackedScene" uid="uid://c0ycu4861l2cw" path="res://CORE/Actor.tscn" id="1_wqw3u"]
 [ext_resource type="Script" path="res://info.gd" id="2_o7sp4"]
+[ext_resource type="PackedScene" uid="uid://brvsnl1t8t25d" path="res://tetro/tetro.tscn" id="4_da0lx"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Actor" parent="." instance=ExtResource("1_wqw3u")]
-position = Vector2(40, 32)
+position = Vector2(80, 208)
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("2_o7sp4")
 
+[node name="tetro" parent="." instance=ExtResource("4_da0lx")]
+position = Vector2(16, 72)
+
 [node name="CollisionShape" parent="." instance=ExtResource("1_lb2q0")]
-position = Vector2(96, 40)
-Shape = Array[Rect2i]([Rect2i(0, 0, 16, 48), Rect2i(-16, 0, 16, 16)])
+position = Vector2(0, 224)
+Shape = Array[Rect2i]([Rect2i(0, 0, 160, 16)])

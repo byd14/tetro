@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://brvsnl1t8t25d"]
+
+[ext_resource type="PackedScene" uid="uid://c0ycu4861l2cw" path="res://CORE/Actor.tscn" id="1_poamk"]
+[ext_resource type="Script" path="res://tetro/tetro.gd" id="2_7f1i1"]
+[ext_resource type="Texture2D" uid="uid://dieig1pt6wsqj" path="res://assets/tetro.png" id="2_wy5h8"]
+
+[node name="tetro" instance=ExtResource("1_poamk")]
+script = ExtResource("2_7f1i1")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(8, 0)
+texture = ExtResource("2_wy5h8")
+hframes = 5
+frame = 4

@@ -13,7 +13,7 @@ func collision_move(offset : Vector2, time : float = 1) -> Vector2:
 	v_delta = round(reminder)
 	reminder -= v_delta
 
-	var collision_x : bool = false; var collision_y : bool = true
+	var collision_x : bool = false; var collision_y : bool = false
 
 	if v_delta.x != 0:
 		if BACKYARD.collision_check(Shape, Shape.Overlaps, Vector2(v_delta.x, 0)):
