@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwmsunqes5be6"]
+
+[ext_resource type="PackedScene" uid="uid://br0tti4kulnk8" path="res://CORE/CollisionShape.tscn" id="1_lb2q0"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CollisionShape" parent="." instance=ExtResource("1_lb2q0")]
+position = Vector2(106, 94)
+ObjectType = &"Solid"
+Overlaps = Array[StringName]([&"Solid", &"Block"])

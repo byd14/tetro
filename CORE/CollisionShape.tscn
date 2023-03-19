@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://br0tti4kulnk8"]
+
+[ext_resource type="Script" path="res://CORE/CollisionShape.gd" id="1_45fa1"]
+
+[node name="CollisionShape" type="Node2D"]
+script = ExtResource("1_45fa1")
