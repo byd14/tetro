@@ -13,7 +13,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(BACKYARD.collision_ray(Vector2(8, 8), Vector2(-1, -1)))
+	pass
 
 func _draw():
 	if Engine.is_editor_hint():
@@ -26,18 +26,20 @@ func _process(_delta):
 	if Engine.is_editor_hint():
 		queue_redraw()	
 
-func get_box_world(box : Rect2i, offset : Vector2i = Vector2i.ZERO):
+func get_box_world(box : Rect2i, offset : Vector2i = Vector2i.ZERO) -> Rect2i:
 	return Rect2i(box.position + Vector2i(global_position) + offset, box.size)
 
-func complex_intersect(other : CollisionShape, offset : Vector2i = Vector2i.ZERO):
+func complex_intersect(other : CollisionShape, offset : Vector2 = Vector2.ZERO) -> bool:
 	for box in Shape:
 		for box_ in other.Shape:
 			if get_box_world(box, offset).intersects(other.get_box_world(box_)):
 				return true
 	return false
 
-func complex_point(point : Vector2i):
-	pass
+func complex_point(point : Vector2i) -> bool:
+	for box in Shape:
+		if get_box_world(box).has_point(point): return true
+	return false
 
 func complex_ray(origin : Vector2, dir : Vector2):
 	for box in Shape:
