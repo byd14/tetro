@@ -13,7 +13,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(BACKYARD.collision_check(self, Overlaps))
+	print(BACKYARD.collision_ray(Vector2(8, 8), Vector2(-1, -1)))
 
 func _draw():
 	if Engine.is_editor_hint():
@@ -39,5 +39,14 @@ func complex_intersect(other : CollisionShape, offset : Vector2i = Vector2i.ZERO
 func complex_point(point : Vector2i):
 	pass
 
-func complex_line(start : Vector2i, end : Vector2i):
-	pass
+func complex_ray(origin : Vector2, dir : Vector2):
+	for box in Shape:
+		var wbox : Rect2i = get_box_world(box)
+		var tmin : Vector2 = (Vector2(wbox.position) - origin) / dir
+		var tmax : Vector2 = (Vector2(wbox.end) - origin) / dir
+		var t1 : Vector2 = Vector2(min(tmin.x, tmax.x), min(tmin.y, tmax.y))
+		var t2 : Vector2 = Vector2(max(tmax.x, tmin.x), max(tmax.y, tmin.y))
+		var tnear : float = max(t1.x, t1.y)
+		var tfar : float = min(t2.x, t2.y)
+		if (tnear > tfar) or (tnear < 0  and tfar < 0): return false
+		return Vector2(tnear, tfar)
