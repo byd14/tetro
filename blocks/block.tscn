@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://wsxf0y6yfrrs"]
+
+[ext_resource type="PackedScene" uid="uid://c0ycu4861l2cw" path="res://CORE/Actor.tscn" id="1_h0sb0"]
+[ext_resource type="Script" path="res://blocks/block.gd" id="2_1njt6"]
+
+[node name="block" instance=ExtResource("1_h0sb0")]
+script = ExtResource("2_1njt6")
+
+[node name="CollisionShape" parent="." index="0"]
+Shape = Array[Rect2i]([Rect2i(0, 0, 16, 16), Rect2i(16, 16, 16, 16), Rect2i(16, 0, 16, 16), Rect2i(0, 16, 16, 16), Rect2i(32, 0, 16, 16), Rect2i(32, 16, 16, 16), Rect2i(48, 0, 16, 16), Rect2i(48, 16, 16, 16), Rect2i(64, 16, 16, 16), Rect2i(64, 0, 16, 16)])

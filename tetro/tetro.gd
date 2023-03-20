@@ -1,11 +1,12 @@
+class_name Tetro
 extends Actor
 
-const SPEED = 120
-const JUMP_HEIGHT = 56
-const GRAVITY = 980
-const FALL_GRAVITY = 1290
-const ACCELERATION = SPEED * 20
-const FRICTION = SPEED * 10
+const SPEED : int = 120
+const JUMP_HEIGHT : int = 56
+const GRAVITY : int = 980
+const FALL_GRAVITY : int = 1290
+const ACCELERATION : int = SPEED * 20
+const FRICTION : int = SPEED * 10
 
 @onready var JUMP_VELOCITY = -sqrt(2 * GRAVITY * JUMP_HEIGHT)
 
@@ -21,10 +22,13 @@ func _physics_process(delta):
 	
 	var direction = Input.get_axis("input_left", "input_right")
 
-	if BACKYARD.collision_check(Shape, Shape.Overlaps, Vector2.DOWN):
+	if BACKYARD.collision_check(Collision, Collision.Overlaps, Vector2.DOWN):
 		is_grounded = true
 	else:
 		is_grounded = false
+
+	if Input.is_action_just_pressed("input_test"):
+		print(BACKYARD.BlockMap)
 
 	if Input.is_action_just_pressed("input_jump"):
 		if is_grounded: velocity.y = JUMP_VELOCITY

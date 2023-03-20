@@ -1,14 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0ycu4861l2cw"]
+[gd_scene load_steps=3 format=3 uid="uid://c0ycu4861l2cw"]
 
 [ext_resource type="Script" path="res://CORE/Actor.gd" id="1_dxqgc"]
 [ext_resource type="PackedScene" uid="uid://br0tti4kulnk8" path="res://CORE/CollisionShape.tscn" id="1_hrg3j"]
-[ext_resource type="Texture2D" uid="uid://dj5xvvlkew200" path="res://assets/block.png" id="2_e4pk4"]
 
 [node name="Actor" type="Node2D"]
 script = ExtResource("1_dxqgc")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, 8)
-texture = ExtResource("2_e4pk4")
 
 [node name="CollisionShape" parent="." instance=ExtResource("1_hrg3j")]

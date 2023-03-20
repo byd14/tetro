@@ -1,6 +1,6 @@
 extends Label
 
-@onready var a : Actor = $"../Actor"
+@onready var a : Actor = $"../tetro"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

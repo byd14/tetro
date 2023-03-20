@@ -7,7 +7,7 @@
 [node name="tetro" instance=ExtResource("1_poamk")]
 script = ExtResource("2_7f1i1")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 position = Vector2(8, 0)
 texture = ExtResource("2_wy5h8")
 hframes = 5
