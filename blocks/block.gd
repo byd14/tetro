@@ -15,6 +15,7 @@ func _ready():
 	for box in Collision.Shape:
 		var temp : Sprite2D = Sprite2D.new()
 		temp.texture = BlockTexture
+		#temp.
 		add_child(temp)
 		temp.move_local_x(8 + box.position.x); temp.move_local_y(8 + box.position.y)
 		BoxSpriteDict[box.position] = temp
@@ -30,7 +31,8 @@ func _physics_process(delta):
 				else:
 					collision_move(velocity, delta)
 			BLK_State.REST:
-				pass
+				if Collision.Shape.is_empty():
+					queue_free()
 
 func go_to_rest():
 	state = BLK_State.REST

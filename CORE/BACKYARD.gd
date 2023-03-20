@@ -43,18 +43,13 @@ func line_check(line : int):
 			break
 	if line_full:
 		line_clear(line)
-#		print(BlockMap)
 
 func line_clear(line : int):
 	for i in LINE_LENGTH:
-		var block : Block = BlockMap[Vector2i(i * 16, line)]
-		for box in block.Collision.Shape:
-			if (block.Collision.get_box_world(box).position == Vector2i(i * 16, line)) :
-				BlockMap.erase(Vector2i(i * 16, line))
-				block.BoxSpriteDict[box.position].queue_free()
-				block.Collision.Shape.erase(box)
-				block.BoxSpriteDict.erase(box.position)
-				if block.Collision.Shape.is_empty():
-					block.queue_free()
-			else:
-				print(block.Collision.get_box_world(box).position)
+		var current : Vector2i = Vector2i(i * 16, line)
+		var local : Rect2i = Rect2i(Vector2i(current - Vector2i(BlockMap[current].global_position)), Vector2i(16, 16))
+		print(BlockMap[current])
+		BlockMap[current].BoxSpriteDict[local.position].queue_free()
+		BlockMap[current].BoxSpriteDict.erase(local.position)
+		BlockMap[current].Collision.Shape.erase(local)
+		BlockMap.erase(current)
