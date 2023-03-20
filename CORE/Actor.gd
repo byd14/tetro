@@ -29,7 +29,7 @@ func collision_move(offset : Vector2, time : float = 1) -> Vector2:
 			v_delta.y = 0; reminder.y = 0
 			collision_y = true
 		if platform:
-			var passenger : CollisionShape = BACKYARD.collision_check(Collision, ["Chara"], Vector2.UP)
+			var passenger = BACKYARD.collision_check(Collision, ["Chara"], Vector2.UP)
 			if passenger:
 				global_position.y += v_delta.y
 				passenger.get_parent().collision_move(Vector2(0, v_delta.y), 1)

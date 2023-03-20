@@ -7,13 +7,10 @@ extends Node2D
 @export var Overlaps : Array[StringName] = ["Solid", "Block"]
 @export var DebugColor : Color = Color(Color.AQUA, 0.4)
 
-func _init():
-	if !Engine.is_editor_hint():
-		add_to_group(ObjectType)
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	if !Engine.is_editor_hint():
+		add_to_group(ObjectType)
 
 func _draw():
 	if Engine.is_editor_hint():

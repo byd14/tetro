@@ -26,9 +26,9 @@ func _physics_process(delta):
 		is_grounded = true
 	else:
 		is_grounded = false
-
+	
 	if Input.is_action_just_pressed("input_test"):
-		print(BACKYARD.BlockMap)
+		print(get_tree().get_nodes_in_group("Solid"))
 
 	if Input.is_action_just_pressed("input_jump"):
 		if is_grounded: velocity.y = JUMP_VELOCITY

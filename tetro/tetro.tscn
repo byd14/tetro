@@ -12,3 +12,6 @@ position = Vector2(8, 0)
 texture = ExtResource("2_wy5h8")
 hframes = 5
 frame = 4
+
+[node name="CollisionShape" parent="." index="1"]
+ObjectType = &"Chara"

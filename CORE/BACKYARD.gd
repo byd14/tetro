@@ -48,7 +48,6 @@ func line_clear(line : int):
 	for i in LINE_LENGTH:
 		var current : Vector2i = Vector2i(i * 16, line)
 		var local : Rect2i = Rect2i(Vector2i(current - Vector2i(BlockMap[current].global_position)), Vector2i(16, 16))
-		print(BlockMap[current])
 		BlockMap[current].BoxSpriteDict[local.position].queue_free()
 		BlockMap[current].BoxSpriteDict.erase(local.position)
 		BlockMap[current].Collision.Shape.erase(local)
