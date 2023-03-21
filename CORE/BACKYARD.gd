@@ -18,16 +18,36 @@ func collision_check(querier : CollisionShape, types : Array[StringName] = ["Sol
 			return col
 	return false
 
-func collision_ray(origin : Vector2, dir : Vector2, ignore : CollisionShape = null, types : Array[StringName] = ["Solid"]):
+func collision_point(point : Vector2, ignore : CollisionShape = null, types : Array[StringName] = ["Block"]):
 	var vault : Array[CollisionShape] = []
 	for i in types:
 		vault.append_array(get_tree().get_nodes_in_group(i))
 	vault.erase(ignore)
 	for col in vault:
+		if col.complex_point(point):
+			return col
+	return false
+
+func collision_ray(origin : Vector2, dir : Vector2, ignore : CollisionShape = null, types : Array[StringName] = ["Solid"], return_point : bool = false):
+	var vault : Array[CollisionShape] = []
+	for i in types:
+		vault.append_array(get_tree().get_nodes_in_group(i))
+	vault.erase(ignore)
+	var result : CollisionShape = null
+	var nearest : float = 0
+	for col in vault:
 		var test = col.complex_ray(origin, dir.normalized())
 		if test:
-			return test
-	return false
+			if result == null:
+				result = col
+				nearest = test
+			elif test < nearest:
+				result = col
+				nearest = test
+	if !return_point:
+		return result
+	else: 
+		return origin + dir * nearest
 
 func _physics_process(_delta):
 	if !LineCheckQueue.is_empty():

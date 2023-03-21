@@ -39,7 +39,10 @@ func complex_point(point : Vector2i) -> bool:
 	return false
 
 func complex_ray(origin : Vector2, dir : Vector2):
+	var nearest = 9999
 	for box in Shape:
+#		if get_parent():
+#			print(get_parent())
 		var wbox : Rect2i = get_box_world(box)
 		var tmin : Vector2 = (Vector2(wbox.position) - origin) / dir
 		var tmax : Vector2 = (Vector2(wbox.end) - origin) / dir
@@ -47,5 +50,11 @@ func complex_ray(origin : Vector2, dir : Vector2):
 		var t2 : Vector2 = Vector2(max(tmax.x, tmin.x), max(tmax.y, tmin.y))
 		var tnear : float = max(t1.x, t1.y)
 		var tfar : float = min(t2.x, t2.y)
-		if (tnear > tfar) or (tnear < 0  and tfar < 0): return false
-		return Vector2(tnear, tfar)
+		if (tnear > tfar) or (tnear < 0  and tfar < 0):
+			continue
+		elif tnear < nearest:
+			nearest = tnear
+	if nearest == 9999:
+		return false
+	else:
+		return nearest

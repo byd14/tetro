@@ -1,6 +1,9 @@
 class_name Tetro
 extends Actor
 
+enum TTR_State {IDLE, HOOK}
+var state : TTR_State = TTR_State.IDLE
+
 const SPEED : int = 120
 const JUMP_HEIGHT : int = 56
 const GRAVITY : int = 980
@@ -8,7 +11,8 @@ const FALL_GRAVITY : int = 1290
 const ACCELERATION : int = SPEED * 20
 const FRICTION : int = SPEED * 10
 
-@onready var JUMP_VELOCITY = -sqrt(2 * GRAVITY * JUMP_HEIGHT)
+@onready var JUMP_VELOCITY : float = -sqrt(2 * GRAVITY * JUMP_HEIGHT)
+@onready var image : Sprite2D = $Sprite2D
 
 var is_grounded : bool
 
@@ -20,7 +24,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	
-	var direction = Input.get_axis("input_left", "input_right")
+	var direction : float = Input.get_axis("input_left", "input_right")
+	var mouse_loc : Vector2 = get_viewport().get_mouse_position()
+
+	image.flip_h = mouse_loc.x < global_position.x + 8
 
 	if BACKYARD.collision_check(Collision, Collision.Overlaps, Vector2.DOWN):
 		is_grounded = true
@@ -28,17 +35,32 @@ func _physics_process(delta):
 		is_grounded = false
 	
 	if Input.is_action_just_pressed("input_test"):
-		print(get_tree().get_nodes_in_group("Solid"))
-
+		pass
+	if Input.is_action_just_pressed("input_action"):
+		hook(mouse_loc)
 	if Input.is_action_just_pressed("input_jump"):
-		if is_grounded: velocity.y = JUMP_VELOCITY
+		jump()
 	if Input.is_action_just_released("input_jump"):
 		if velocity.y < 0: velocity.y /= 2
 
-	velocity.x = move_toward(velocity.x, direction * SPEED, (ACCELERATION if direction != 0 else FRICTION) * delta)
-	velocity.y += get_gravity() * delta
+	match state:
+		TTR_State.IDLE:
+			velocity.x = move_toward(velocity.x, direction * SPEED, (ACCELERATION if direction != 0 else FRICTION) * delta)
+			velocity.y += get_gravity() * delta
+		TTR_State.HOOK:
+			pass
 
 	velocity *= collision_move(velocity, delta) 
 
 func get_gravity() -> float:
 	return (FALL_GRAVITY if velocity.y > 0 else GRAVITY)
+
+func jump(strength : float = JUMP_VELOCITY):
+	if is_grounded && state == TTR_State.IDLE: velocity.y = strength
+func hook(target : Vector2):
+	var block = BACKYARD.collision_point(target)
+	if block:
+		var tetro_centre : Vector2 = global_position + Vector2(8, 8)
+		var ray = BACKYARD.collision_ray(tetro_centre, target - tetro_centre, null, Collision.Overlaps)
+		if ray:
+			print(ray.get_parent())

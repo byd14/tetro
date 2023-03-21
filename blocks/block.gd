@@ -2,7 +2,7 @@
 class_name Block
 extends Actor
 
-enum BLK_State {FALL, REST}
+enum BLK_State {FALL, REST, FOLLOW}
 var state : BLK_State = BLK_State.FALL
 
 const FALL_SPEED : int = 80
@@ -16,7 +16,6 @@ func _ready():
 	for box in Collision.Shape:
 		var temp : Sprite2D = Sprite2D.new()
 		temp.texture = BlockTexture
-		#temp.
 		add_child(temp)
 		temp.move_local_x(8 + box.position.x); temp.move_local_y(8 + box.position.y)
 		BoxSpriteDict[box.position] = temp
@@ -28,7 +27,7 @@ func _physics_process(delta):
 		match state:
 			BLK_State.FALL:
 				if BACKYARD.collision_check(Collision, Collision.Overlaps, Vector2.DOWN):
-					go_to_rest()
+					sleep()
 				else:
 					collision_move(velocity, delta)
 			BLK_State.REST:
@@ -37,7 +36,7 @@ func _physics_process(delta):
 				elif !BACKYARD.collision_check(Collision, Collision.Overlaps, Vector2.DOWN):
 					wake()
 
-func go_to_rest():
+func sleep():
 	state = BLK_State.REST
 	for box in Collision.Shape:
 		var wbox_pos : Vector2i = Collision.get_box_world(box).position
