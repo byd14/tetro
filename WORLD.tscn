@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwmsunqes5be6"]
+[gd_scene load_steps=8 format=3 uid="uid://dwmsunqes5be6"]
 
 [ext_resource type="PackedScene" uid="uid://br0tti4kulnk8" path="res://CORE/CollisionShape.tscn" id="1_lb2q0"]
 [ext_resource type="Script" path="res://info.gd" id="2_o7sp4"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://brvsnl1t8t25d" path="res://tetro/tetro.tscn" id="4_da0lx"]
 [ext_resource type="PackedScene" uid="uid://cg7dmiiweeaqs" path="res://CORE/CollisionRect.tscn" id="5_2c557"]
 [ext_resource type="PackedScene" uid="uid://cx0pomk5jmxbu" path="res://blocks/block_O.tscn" id="6_tibkk"]
-[ext_resource type="PackedScene" uid="uid://jawg5gp64jr6" path="res://blocks/block_I.tscn" id="7_x6p5f"]
 [ext_resource type="PackedScene" uid="uid://b5uyd2tdfd02u" path="res://blocks/block_J.tscn" id="8_1dngh"]
 
 [node name="Node2D" type="Node2D"]
@@ -15,9 +14,10 @@
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("2_o7sp4")
+metadata/_edit_use_anchors_ = true
 
 [node name="tetro" parent="." instance=ExtResource("4_da0lx")]
-position = Vector2(24, -8)
+position = Vector2(24, 32)
 
 [node name="layout" type="Node" parent="."]
 
@@ -34,31 +34,7 @@ position = Vector2(0, 224)
 Rect = Rect2i(0, 0, 160, 32)
 
 [node name="block" parent="." instance=ExtResource("6_tibkk")]
-position = Vector2(96, 192)
+position = Vector2(80, 40)
 
-[node name="block2" parent="." instance=ExtResource("6_tibkk")]
-position = Vector2(32, 208)
-
-[node name="block3" parent="." instance=ExtResource("6_tibkk")]
-position = Vector2(0, 16)
-
-[node name="block4" parent="." instance=ExtResource("6_tibkk")]
-position = Vector2(64, 104)
-
-[node name="block5" parent="." instance=ExtResource("7_x6p5f")]
-position = Vector2(96, 208)
-
-[node name="block6" parent="." instance=ExtResource("8_1dngh")]
-position = Vector2(48, 16)
-
-[node name="block7" parent="." instance=ExtResource("6_tibkk")]
-position = Vector2(128, 192)
-
-[node name="block8" parent="." instance=ExtResource("6_tibkk")]
-position = Vector2(0, 208)
-
-[node name="block9" parent="." instance=ExtResource("7_x6p5f")]
-position = Vector2(96, 72)
-
-[node name="block10" parent="." instance=ExtResource("8_1dngh")]
-position = Vector2(32, 40)
+[node name="block2" parent="." instance=ExtResource("8_1dngh")]
+position = Vector2(136, 48)

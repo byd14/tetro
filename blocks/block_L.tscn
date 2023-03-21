@@ -6,12 +6,13 @@
 [node name="block" instance=ExtResource("1_336vr")]
 
 [node name="CollisionRect" parent="CollisionShape" index="0" instance=ExtResource("2_j56i3")]
+Rect = Rect2i(-24, -8, 16, 16)
 
 [node name="CollisionRect2" parent="CollisionShape" index="1" instance=ExtResource("2_j56i3")]
-Rect = Rect2i(16, 0, 16, 16)
+Rect = Rect2i(-8, -8, 16, 16)
 
 [node name="CollisionRect3" parent="CollisionShape" index="2" instance=ExtResource("2_j56i3")]
-Rect = Rect2i(32, 0, 16, 16)
+Rect = Rect2i(8, -8, 16, 16)
 
 [node name="CollisionRect4" parent="CollisionShape" index="3" instance=ExtResource("2_j56i3")]
-Rect = Rect2i(32, -16, 16, 16)
+Rect = Rect2i(8, -24, 16, 16)

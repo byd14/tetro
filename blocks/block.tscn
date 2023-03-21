@@ -8,3 +8,5 @@ script = ExtResource("2_1njt6")
 
 [node name="CollisionShape" parent="." index="0"]
 ObjectType = &"Block"
+
+[node name="image_origin" type="Node2D" parent="." index="1"]
