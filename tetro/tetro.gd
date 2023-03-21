@@ -62,5 +62,6 @@ func hook(target : Vector2):
 	if block:
 		var tetro_centre : Vector2 = global_position + Vector2(8, 8)
 		var ray = BACKYARD.collision_ray(tetro_centre, target - tetro_centre, null, Collision.Overlaps)
-		if ray:
-			print(ray.get_parent())
+		if ray && ray.get_parent():
+			if ray.get_parent() == block.get_parent():
+				print("success!")

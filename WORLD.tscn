@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwmsunqes5be6"]
+[gd_scene load_steps=7 format=3 uid="uid://dwmsunqes5be6"]
 
 [ext_resource type="PackedScene" uid="uid://br0tti4kulnk8" path="res://CORE/CollisionShape.tscn" id="1_lb2q0"]
 [ext_resource type="Script" path="res://info.gd" id="2_o7sp4"]
 [ext_resource type="TileSet" uid="uid://8nfqxvp5n2lp" path="res://assets/simple_tset.tres" id="3_m2tar"]
 [ext_resource type="PackedScene" uid="uid://brvsnl1t8t25d" path="res://tetro/tetro.tscn" id="4_da0lx"]
 [ext_resource type="PackedScene" uid="uid://cean5eo7g8lcx" path="res://blocks/block_O.tscn" id="5_appqd"]
+[ext_resource type="PackedScene" uid="uid://2fi1ouoao2t5" path="res://blocks/block_L.tscn" id="6_o43sb"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -29,3 +30,6 @@ Shape = Array[Rect2i]([Rect2i(0, 0, 160, 32), Rect2i(-16, -200, 16, 200), Rect2i
 
 [node name="block" parent="." instance=ExtResource("5_appqd")]
 position = Vector2(104, 80)
+
+[node name="block2" parent="." instance=ExtResource("6_o43sb")]
+position = Vector2(40, 96)
