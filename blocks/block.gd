@@ -9,6 +9,7 @@ const FALL_SPEED : int = 80
 
 var BlockTexture : Texture2D = preload("res://assets/block.png")
 var BoxSpriteDict : Dictionary
+var reshape_queued : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

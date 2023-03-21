@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://brvsnl1t8t25d"]
+[gd_scene load_steps=5 format=3 uid="uid://brvsnl1t8t25d"]
 
 [ext_resource type="PackedScene" uid="uid://c0ycu4861l2cw" path="res://CORE/Actor.tscn" id="1_poamk"]
 [ext_resource type="Script" path="res://tetro/tetro.gd" id="2_7f1i1"]
 [ext_resource type="Texture2D" uid="uid://dieig1pt6wsqj" path="res://assets/tetro.png" id="2_wy5h8"]
+[ext_resource type="PackedScene" uid="uid://cg7dmiiweeaqs" path="res://CORE/CollisionRect.tscn" id="4_is38s"]
 
 [node name="tetro" instance=ExtResource("1_poamk")]
 script = ExtResource("2_7f1i1")
@@ -15,3 +16,5 @@ frame = 4
 
 [node name="CollisionShape" parent="." index="1"]
 ObjectType = &"Chara"
+
+[node name="CollisionRect" parent="CollisionShape" index="0" instance=ExtResource("4_is38s")]

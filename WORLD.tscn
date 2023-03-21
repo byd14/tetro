@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwmsunqes5be6"]
+[gd_scene load_steps=9 format=3 uid="uid://dwmsunqes5be6"]
 
 [ext_resource type="PackedScene" uid="uid://br0tti4kulnk8" path="res://CORE/CollisionShape.tscn" id="1_lb2q0"]
 [ext_resource type="Script" path="res://info.gd" id="2_o7sp4"]
 [ext_resource type="TileSet" uid="uid://8nfqxvp5n2lp" path="res://assets/simple_tset.tres" id="3_m2tar"]
 [ext_resource type="PackedScene" uid="uid://brvsnl1t8t25d" path="res://tetro/tetro.tscn" id="4_da0lx"]
-[ext_resource type="PackedScene" uid="uid://cean5eo7g8lcx" path="res://blocks/block_O.tscn" id="5_appqd"]
-[ext_resource type="PackedScene" uid="uid://2fi1ouoao2t5" path="res://blocks/block_L.tscn" id="6_o43sb"]
+[ext_resource type="PackedScene" uid="uid://cg7dmiiweeaqs" path="res://CORE/CollisionRect.tscn" id="5_2c557"]
+[ext_resource type="PackedScene" uid="uid://cx0pomk5jmxbu" path="res://blocks/block_O.tscn" id="6_tibkk"]
+[ext_resource type="PackedScene" uid="uid://jawg5gp64jr6" path="res://blocks/block_I.tscn" id="7_x6p5f"]
+[ext_resource type="PackedScene" uid="uid://b5uyd2tdfd02u" path="res://blocks/block_J.tscn" id="8_1dngh"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,21 +17,48 @@ offset_bottom = 23.0
 script = ExtResource("2_o7sp4")
 
 [node name="tetro" parent="." instance=ExtResource("4_da0lx")]
-position = Vector2(-16, 8)
+position = Vector2(24, -8)
 
 [node name="layout" type="Node" parent="."]
 
 [node name="TileMap" type="TileMap" parent="layout"]
+modulate = Color(2, 1, 1, 1)
 tile_set = ExtResource("3_m2tar")
 format = 2
 layer_0/tile_data = PackedInt32Array(983040, 0, 0, 983041, 0, 0, 983042, 0, 0, 983043, 0, 0, 983044, 0, 0, 983045, 0, 0, 983046, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 917512, 0, 0, 917513, 0, 0, 917511, 0, 0, 917510, 0, 0, 917509, 0, 0, 917508, 0, 0, 917507, 0, 0, 917506, 0, 0, 917505, 0, 0, 917504, 0, 0)
 
 [node name="CollisionShape" parent="layout" instance=ExtResource("1_lb2q0")]
 position = Vector2(0, 224)
-Shape = Array[Rect2i]([Rect2i(0, 0, 160, 32), Rect2i(-16, -200, 16, 200), Rect2i(160, -200, 16, 200)])
 
-[node name="block" parent="." instance=ExtResource("5_appqd")]
-position = Vector2(104, 80)
+[node name="CollisionRect" parent="layout/CollisionShape" instance=ExtResource("5_2c557")]
+Rect = Rect2i(0, 0, 160, 32)
 
-[node name="block2" parent="." instance=ExtResource("6_o43sb")]
-position = Vector2(40, 96)
+[node name="block" parent="." instance=ExtResource("6_tibkk")]
+position = Vector2(96, 192)
+
+[node name="block2" parent="." instance=ExtResource("6_tibkk")]
+position = Vector2(32, 208)
+
+[node name="block3" parent="." instance=ExtResource("6_tibkk")]
+position = Vector2(0, 16)
+
+[node name="block4" parent="." instance=ExtResource("6_tibkk")]
+position = Vector2(64, 104)
+
+[node name="block5" parent="." instance=ExtResource("7_x6p5f")]
+position = Vector2(96, 208)
+
+[node name="block6" parent="." instance=ExtResource("8_1dngh")]
+position = Vector2(48, 16)
+
+[node name="block7" parent="." instance=ExtResource("6_tibkk")]
+position = Vector2(128, 192)
+
+[node name="block8" parent="." instance=ExtResource("6_tibkk")]
+position = Vector2(0, 208)
+
+[node name="block9" parent="." instance=ExtResource("7_x6p5f")]
+position = Vector2(96, 72)
+
+[node name="block10" parent="." instance=ExtResource("8_1dngh")]
+position = Vector2(32, 40)

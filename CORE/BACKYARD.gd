@@ -47,7 +47,7 @@ func collision_ray(origin : Vector2, dir : Vector2, ignore : CollisionShape = nu
 	if !return_point:
 		return result
 	else: 
-		return origin + dir * nearest
+		return origin + dir.normalized() * nearest
 
 func _physics_process(_delta):
 	if !LineCheckQueue.is_empty():

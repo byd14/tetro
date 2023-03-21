@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cean5eo7g8lcx"]
+[gd_scene load_steps=3 format=3 uid="uid://cx0pomk5jmxbu"]
 
-[ext_resource type="PackedScene" uid="uid://wsxf0y6yfrrs" path="res://blocks/block.tscn" id="1_stgfe"]
+[ext_resource type="PackedScene" uid="uid://cyp45353b7eo3" path="res://blocks/block.tscn" id="1_ex8tb"]
+[ext_resource type="PackedScene" uid="uid://cg7dmiiweeaqs" path="res://CORE/CollisionRect.tscn" id="2_kovsu"]
 
-[node name="block" instance=ExtResource("1_stgfe")]
+[node name="block" instance=ExtResource("1_ex8tb")]
 
-[node name="CollisionShape" parent="." index="0"]
-Shape = Array[Rect2i]([Rect2i(0, 0, 16, 16), Rect2i(16, 0, 16, 16), Rect2i(16, -16, 16, 16), Rect2i(0, -16, 16, 16)])
+[node name="CollisionRect" parent="CollisionShape" index="0" instance=ExtResource("2_kovsu")]
+
+[node name="CollisionRect2" parent="CollisionShape" index="1" instance=ExtResource("2_kovsu")]
+Rect = Rect2i(16, 0, 16, 16)
+
+[node name="CollisionRect3" parent="CollisionShape" index="2" instance=ExtResource("2_kovsu")]
+Rect = Rect2i(0, -16, 16, 16)
+
+[node name="CollisionRect4" parent="CollisionShape" index="3" instance=ExtResource("2_kovsu")]
+Rect = Rect2i(16, -16, 16, 16)
