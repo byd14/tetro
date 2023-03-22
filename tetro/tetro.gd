@@ -18,11 +18,9 @@ const HOOK_CONTRACTION : int = 12
 var is_grounded : bool
 var target : Vector2
 var block_load : Block = null
-var block_bag : Array[PackedScene]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(load(scene_file_path))
 	pass # Replace with function body.
 
 
@@ -63,11 +61,11 @@ func _physics_process(delta):
 			velocity = (target - (global_position + Vector2(8, 8))) * HOOK_CONTRACTION
 			var reach = BACKYARD.collision_check(Collision, ["Block"], velocity.normalized() * 8)
 			if reach:
+				print(reach)
 				state = TTR_State.IDLE
 				block_load.freeze(false)
-				if Input.is_action_pressed("input_action"):
-					block_load = reach.get_parent()
-					block_load.follow(self)
+				block_load = reach.get_parent()
+				block_load.follow(self)
 		
 	image.flip_h = target.x < global_position.x + 8
 
@@ -93,7 +91,4 @@ func hook(point : Vector2):
 				target = BACKYARD.collision_ray(tetro_centre, point - tetro_centre, null, ["Block"], true)
 
 func throw(point : Vector2):
-	block_load.state = Block.BLK_State.THROW
-	block_load.velocity = (point - block_load.global_position) * 2
-	block_load.Collision.add_to_group(block_load.Collision.ObjectType)
-	block_load = null
+	print("throw")

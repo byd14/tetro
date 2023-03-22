@@ -17,7 +17,7 @@ script = ExtResource("2_o7sp4")
 metadata/_edit_use_anchors_ = true
 
 [node name="tetro" parent="." instance=ExtResource("4_da0lx")]
-position = Vector2(32, 8)
+position = Vector2(64, 200)
 
 [node name="layout" type="Node" parent="."]
 
@@ -34,7 +34,7 @@ position = Vector2(0, 224)
 Rect = Rect2i(0, 0, 160, 32)
 
 [node name="block2" parent="." instance=ExtResource("8_1dngh")]
-position = Vector2(88, 120)
+position = Vector2(104, 24)
 
 [node name="block6" parent="." instance=ExtResource("9_j3vlb")]
 position = Vector2(136, 136)

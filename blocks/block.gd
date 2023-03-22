@@ -15,7 +15,7 @@ var BlockTexture : Texture2D = preload("res://assets/block.png")
 var BoxSpriteDict : Dictionary
 var carry : Actor = null
 var target_rotation : float = 0
-
+var throw_target : Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	platform = true
@@ -41,11 +41,7 @@ func _physics_process(delta):
 					velocity = ((carry.global_position + Vector2(8, -24)) - global_position) * FOLLOW_CONTRACTION
 					velocity *= collision_move(velocity, delta)
 			BLK_State.THROW:
-					if velocity.length() > 6:
-						velocity = velocity.move_toward(Vector2.ZERO, THROW_FRICTION * delta)
-						collision_move(velocity, delta)
-					else:
-						pass
+					pass
 			BLK_State.REST:
 				if Collision.Shape.is_empty():
 					queue_free()
@@ -76,6 +72,7 @@ func freeze(new_freeze : bool = true):
 
 func follow(new_carry : Actor):
 	carry = new_carry
+	print(carry)
 	Collision.remove_from_group(Collision.ObjectType)
 	platform = false
 	velocity = Vector2.ZERO
