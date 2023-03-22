@@ -2,18 +2,19 @@
 class_name Block
 extends Actor
 
-enum BLK_State {FALL, REST, FREEZE, FOLLOW}
+enum BLK_State {FALL, REST, FREEZE, FOLLOW, THROW}
 var state : BLK_State = BLK_State.FALL
 
 const FALL_SPEED : int = 80
 const FOLLOW_CONTRACTION : int = 15
+const THROW_FRICTION : int = 100
 
 @onready var image_origin : Node2D = $image_origin
 
 var BlockTexture : Texture2D = preload("res://assets/block.png")
 var BoxSpriteDict : Dictionary
-var reshape_queued : bool = false
 var carry : Actor = null
+var target_rotation : float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,10 +35,17 @@ func _physics_process(delta):
 				if BACKYARD.collision_check(Collision, Collision.Overlaps, Vector2.DOWN):
 					sleep()
 				else:
-					collision_move(velocity, delta)
+					velocity *= collision_move(velocity, delta)
 			BLK_State.FOLLOW:
+					image_origin.global_rotation = lerp_angle(image_origin.global_rotation, deg_to_rad(target_rotation), delta * 16)
 					velocity = ((carry.global_position + Vector2(8, -24)) - global_position) * FOLLOW_CONTRACTION
 					velocity *= collision_move(velocity, delta)
+			BLK_State.THROW:
+					if velocity.length() > 6:
+						velocity = velocity.move_toward(Vector2.ZERO, THROW_FRICTION * delta)
+						collision_move(velocity, delta)
+					else:
+						pass
 			BLK_State.REST:
 				if Collision.Shape.is_empty():
 					queue_free()
@@ -72,3 +80,17 @@ func follow(new_carry : Actor):
 	platform = false
 	velocity = Vector2.ZERO
 	state = BLK_State.FOLLOW
+
+func rotate_block(clockwise : bool = true):
+	for box in Collision.Shape:
+		var new_box : Rect2i = box
+		if !clockwise:
+			new_box.position.x = box.position.y
+			new_box.position.y = box.position.x * -1 - 16
+		else:
+			new_box.position.y = box.position.x
+			new_box.position.x = box.position.y * -1 - 16
+		Collision.Shape[Collision.Shape.find(box)] = new_box
+	target_rotation += 90 * (int(clockwise) * 2 - 1)
+	if BACKYARD.collision_check(Collision, Collision.Overlaps):
+		rotate_block(!clockwise)

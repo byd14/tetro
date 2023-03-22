@@ -18,9 +18,11 @@ const HOOK_CONTRACTION : int = 12
 var is_grounded : bool
 var target : Vector2
 var block_load : Block = null
+var block_bag : Array[PackedScene]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(load(scene_file_path))
 	pass # Replace with function body.
 
 
@@ -36,9 +38,17 @@ func _physics_process(delta):
 		is_grounded = false
 	
 	if Input.is_action_just_pressed("input_test"):
-		pass
+		if block_load:
+			block_load.rotate_block(false)
+	if Input.is_action_just_pressed("input_test2"):
+		if block_load:
+			block_load.rotate_block(true)
+			
 	if Input.is_action_just_pressed("input_action"):
-		hook(mouse_loc)
+		if block_load:
+			throw(mouse_loc)
+		else:
+			hook(mouse_loc)
 	if Input.is_action_just_pressed("input_jump"):
 		jump()
 	if Input.is_action_just_released("input_jump"):
@@ -53,9 +63,11 @@ func _physics_process(delta):
 			velocity = (target - (global_position + Vector2(8, 8))) * HOOK_CONTRACTION
 			var reach = BACKYARD.collision_check(Collision, ["Block"], velocity.normalized() * 8)
 			if reach:
-				block_load.freeze(false)
-				reach.get_parent().follow(self)
 				state = TTR_State.IDLE
+				block_load.freeze(false)
+				if Input.is_action_pressed("input_action"):
+					block_load = reach.get_parent()
+					block_load.follow(self)
 		
 	image.flip_h = target.x < global_position.x + 8
 
@@ -66,6 +78,7 @@ func get_gravity() -> float:
 
 func jump(strength : float = JUMP_VELOCITY):
 	if is_grounded && state == TTR_State.IDLE: velocity.y = strength
+
 func hook(point : Vector2):
 	var block = BACKYARD.collision_point(point)
 	if block:
@@ -78,3 +91,9 @@ func hook(point : Vector2):
 				block_load.freeze()
 				state = TTR_State.HOOK
 				target = BACKYARD.collision_ray(tetro_centre, point - tetro_centre, null, ["Block"], true)
+
+func throw(point : Vector2):
+	block_load.state = Block.BLK_State.THROW
+	block_load.velocity = (point - block_load.global_position) * 2
+	block_load.Collision.add_to_group(block_load.Collision.ObjectType)
+	block_load = null

@@ -20,14 +20,14 @@ func _ready():
 		add_to_group(ObjectType)
 
 func _draw():
-	if Engine.is_editor_hint():
+	#if Engine.is_editor_hint():
 		for box in Shape:
 			draw_rect(box, DebugColor)
 			draw_rect(box, DebugColor, false, 0.5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Engine.is_editor_hint():
+	#if Engine.is_editor_hint():
 		queue_redraw()	
 
 func get_box_world(box : Rect2i, offset : Vector2i = Vector2i.ZERO) -> Rect2i:
